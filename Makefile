@@ -54,4 +54,9 @@ test:			$(NAME)
 				@./$(NAME)
 				@echo "$(BLUE)---Ending tests---$(OFF)"
 
+demo:			$(NAME)
+				@echo "$(BLUE)---Starting demo---$(OFF)"
+				@./$(NAME) in.txt "ping -c 5 google.com" "grep rtt" out.txt
+				@echo "$(BLUE)---Ending demo---$(OFF)"
+
 .PHONY: 		all clean fclean re
