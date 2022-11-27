@@ -2,7 +2,8 @@
 NAME			:= pipex
 INCLUDES		:= -I includes
 SOURCE			:= ./source/main.c ./source/validate.c \
-					./source/parser.c ./source/errors.c
+					./source/parser.c ./source/errors.c \
+					./source/pipex.c ./source/utils.c
 OBJS			:= $(SOURCE:./source/%.c=./objects/%.o)
 HEADERS			:= ./includes/pipex.h ./includes/libft.h
 
