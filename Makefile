@@ -7,6 +7,13 @@ SOURCE			:= ./source/main.c ./source/validate.c \
 OBJS			:= $(SOURCE:./source/%.c=./objects/%.o)
 HEADERS			:= ./includes/pipex.h ./includes/libft.h
 
+# Bonus part
+BONUS_NAME			:= $(NAME)_bonus
+BONUS_SOURCE	:= ./source/main_bonus.c ./source/validate_bonus.c \
+					./source/parser_bonus.c ./source/errors_bonus.c \
+					./source/pipex_bonus.c ./source/utils_bonus.c
+BONUS_OBJS		:= $(BONUS_SOURCE:./source/%.c=./objects/%.o)
+
 # General purpose
 LIBFT			:= libft.a
 CC				:= gcc
@@ -39,15 +46,22 @@ $(NAME):		./libft/$(LIBFT) $(OBJS) $(HEADERS)
 				$(CC) $(C_FLAGS) -c $(INCLUDES) -o $@ $<
 
 clean:
-				$(RM) $(OBJS)
+				$(RM) $(OBJS) $(BONUS_OBJS)
 				$(RM) objects
 				make -C libft/ clean
 
 fclean: 		clean
-				$(RM) $(NAME) $(LIBFT)
+				$(RM) $(NAME) $(BONUS_NAME) $(LIBFT)
 				make -C libft/ fclean
 
 re:				fclean all
+
+bonus:			$(BONUS_NAME)
+
+$(BONUS_NAME):	./libft/$(LIBFT) $(BONUS_OBJS) $(HEADERS)
+				cp ./libft/$(LIBFT) .
+				$(CC) $(C_FLAGS) $(INCLUDES) -o $(BONUS_NAME) $(BONUS_OBJS) $(LIBFT)
+				cp $(BONUS_NAME) $(NAME)
 
 test:			$(NAME)
 				@echo "$(BLUE)---Starting tests---$(OFF)"
