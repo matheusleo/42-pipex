@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:53 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/27 18:20:00 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:51:26 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_pipex
 	char	**cmd_2;
 	char	*cmd_path_2;
 	int		outfile;
+	int		status;
 }				t_pipex;
 
 // I/O macros
@@ -46,9 +47,9 @@ int		validate_input(int argc);
 t_pipex	*parse_input(char *argv[], t_pipex *pipex_data);
 
 // Error handlers
-int		error_open(char *file_name);
-int		error_func(char *func_name);
-int		error_access(char *cmd);
+void	error_open(char *file_name, t_pipex *pipex_data);
+void	error_func(char *func_name, t_pipex *pipex_data);
+void	error_access(char *cmd, t_pipex *pipex_data);
 
 // Main functions
 int		pipex(t_pipex *pipex_data);
