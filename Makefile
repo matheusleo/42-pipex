@@ -1,7 +1,8 @@
 # Mandatory part
 NAME			:= pipex
 INCLUDES		:= -I includes
-SOURCE			:= ./source/main.c
+SOURCE			:= ./source/main.c ./source/validate.c \
+					./source/parser.c ./source/errors.c
 OBJS			:= $(SOURCE:./source/%.c=./objects/%.o)
 HEADERS			:= ./includes/pipex.h ./includes/libft.h
 
