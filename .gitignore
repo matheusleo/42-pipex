@@ -1,0 +1,9 @@
+# Object files
+*.o
+*.a
+
+# Program file
+pipex
+
+# Test files
+*.txt
