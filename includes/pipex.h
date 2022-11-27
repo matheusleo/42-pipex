@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:53 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/27 18:51:26 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:52:27 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_pipex
 	char	*cmd_path_2;
 	int		outfile;
 	int		status;
+	int		pipe[2];
 }				t_pipex;
 
 // I/O macros

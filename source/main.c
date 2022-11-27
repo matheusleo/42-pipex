@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:46 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/27 18:49:51 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:52:31 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static t_pipex	init_pipex_struct(void)
 	data.cmd_path_2 = NULL;
 	data.outfile = 1;
 	data.status = OK;
+	data.pipe[0] = 0;
+	data.pipe[1] = 0;
 	return (data);
 }
 
