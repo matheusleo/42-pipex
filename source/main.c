@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:46 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/27 16:44:04 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:49:51 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_pipex	init_pipex_struct(void)
 	data.cmd_2 = NULL;
 	data.cmd_path_2 = NULL;
 	data.outfile = 1;
+	data.status = OK;
 	return (data);
 }
 
@@ -33,7 +34,7 @@ int	shutdown_pipex(t_pipex *pipex_data)
 	free(pipex_data->cmd_path_2);
 	close(pipex_data->infile);
 	close(pipex_data->outfile);
-	exit(OK);
+	exit(pipex_data->status);
 }
 
 int	main(int argc, char *argv[])
@@ -44,5 +45,6 @@ int	main(int argc, char *argv[])
 	pipex_data = init_pipex_struct();
 	parse_input(argv, &pipex_data);
 	pipex(&pipex_data);
+	pipex_data.status = OK;
 	shutdown_pipex(&pipex_data);
 }
