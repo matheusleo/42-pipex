@@ -73,4 +73,9 @@ demo:			$(NAME)
 				@./$(NAME) in.txt "ping -c 5 google.com" "grep rtt" out.txt
 				@echo "$(BLUE)---Ending demo---$(OFF)"
 
+demo_bonus:		$(BONUS_NAME)
+				@echo "$(BLUE)---Starting demo---$(OFF)"
+				@./$(BONUS_NAME) in.txt "ping -c 5 google.com" "grep rtt" out.txt
+				@echo "$(BLUE)---Ending demo---$(OFF)"
+
 .PHONY: 		all clean fclean re
