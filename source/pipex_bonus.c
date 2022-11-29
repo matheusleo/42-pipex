@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:08:10 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/27 18:52:35 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/29 00:36:08 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
 static int	create_child(t_pipex *pipex_data)
 {
@@ -28,37 +28,83 @@ static void	close_pipe(int pipe[2])
 	close(pipe[1]);
 }
 
-static void	exec_write_process(t_pipex *pipex_data)
-{
-	close(pipex_data->pipe[OUTPUT]);
-	dup2(pipex_data->infile, STDIN);
-	dup2(pipex_data->pipe[INPUT], STDOUT);
-	execve(pipex_data->cmd_path_1, pipex_data->cmd_1, __environ);
-}
-
-static void	exec_read_process(t_pipex *pipex_data)
-{
-	close(pipex_data->pipe[INPUT]);
-	dup2(pipex_data->pipe[OUTPUT], STDIN);
-	dup2(pipex_data->outfile, STDOUT);
-	execve(pipex_data->cmd_path_2, pipex_data->cmd_2, __environ);
-}
-
 int	pipex(t_pipex *pipex_data)
 {
 	int	pid_1;
 	int	pid_2;
+	int	pid_3;
+	int	pid_4;
+	int	pipe_1[2];
+	int	pipe_2[2];
+	int	pipe_3[2];
 
-	if (pipe(pipex_data->pipe) == ERR)
-		error_func("pipe", pipex_data);
-	pid_1 = create_child(pipex_data);
+	pipe(pipe_1);
+	pipe(pipe_2);
+	pipe(pipe_3);
+	pid_1 = fork();
 	if (pid_1 == 0)
-		exec_write_process(pipex_data);
-	waitpid(pid_1, NULL, 0);
-	pid_2 = create_child(pipex_data);
+	{
+		// Child process for first cmd
+		ft_printf("from the first child process\n");
+		close(pipe_1[OUTPUT]);
+		dup2(pipex_data->infile, STDIN);
+		dup2(pipe_1[INPUT], STDOUT);
+		execve(
+			parse_program_path(pipex_data->cmds[0], pipex_data),
+			parse_program_args(pipex_data->cmds[0]),
+			__environ
+		);
+	}
+	pid_2 = fork();
 	if (pid_2 == 0)
-		exec_read_process(pipex_data);
-	close_pipe(pipex_data->pipe);
+	{
+		// Child process for second cmd
+		ft_printf("from the second child process\n");
+		close(pipe_1[INPUT]);
+		dup2(pipe_1[OUTPUT], STDIN);
+		dup2(pipe_2[INPUT], STDOUT);
+		execve(
+			parse_program_path(pipex_data->cmds[1], pipex_data),
+			parse_program_args(pipex_data->cmds[1]),
+			__environ
+		);
+	}
+	pid_3 = fork();
+	if (pid_3 == 0)
+	{
+		// Child process for third cmd
+		ft_printf("from the third child process\n");
+		close_pipe(pipe_1);
+		close(pipe_2[INPUT]);
+		dup2(pipe_2[OUTPUT], STDIN);
+		dup2(pipe_3[INPUT], STDOUT);
+		execve(
+			parse_program_path(pipex_data->cmds[2], pipex_data),
+			parse_program_args(pipex_data->cmds[2]),
+			__environ
+		);
+	}
+	pid_4 = fork();
+	if (pid_4 == 0)
+	{
+		// Child process for the fourth cmd
+		ft_printf("from the fourth child process\n");
+		close_pipe(pipe_1);
+		close_pipe(pipe_2);
+		close(pipe_3[INPUT]);
+		dup2(pipe_3[OUTPUT], STDIN);
+		dup2(pipex_data->outfile, STDOUT);
+		execve(
+			parse_program_path(pipex_data->cmds[3], pipex_data),
+			parse_program_args(pipex_data->cmds[3]),
+			__environ
+		);
+	}
+	close_pipe(pipe_1);
+	close_pipe(pipe_2);
+	close_pipe(pipe_3);
+	waitpid(pid_1, NULL, 0);
 	waitpid(pid_2, NULL, 0);
-	return (OK);
+	waitpid(pid_3, NULL, 0);
+	waitpid(pid_4, NULL, 0);
 }
