@@ -1,28 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 12:25:26 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/27 18:27:52 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/29 00:40:49 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-static int	get_fd(char *file_name, t_pipex *pipex_data)
+static int	get_fd(char *file_name, int flags, t_pipex *pipex_data)
 {
 	int	fd;
 
-	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC);
+	fd = open(file_name, O_RDWR | flags);
 	if (fd == ERR)
 		error_open(file_name, pipex_data);
 	return (fd);
 }
 
-static char	*parse_program_path(char *cmd, t_pipex *pipex_data)
+static char	**parse_commands(int argc, char *argv[], t_pipex *pipex_data)
+{
+	char	**commands;
+	int		counter;
+
+	counter = 0;
+	commands = (char **)malloc(sizeof(char *) * (argc - 3));
+	while (counter < argc - 3)
+		commands[counter++] = argv[counter + 2];
+	pipex_data->cmds = commands;
+	pipex_data->cmds_len = counter;
+}
+
+char	**parse_program_args(char *cmd)
+{
+	char	**command;
+
+	command = ft_split(cmd, ' ');
+	return (command);
+}
+
+char	*parse_program_path(char *cmd, t_pipex *pipex_data)
 {
 	char	**cmd_splitted;
 	char	*cmd_path;
@@ -35,13 +56,10 @@ static char	*parse_program_path(char *cmd, t_pipex *pipex_data)
 	return (cmd_path);
 }
 
-t_pipex	*parse_input(char *argv[], t_pipex *pipex_data)
+t_pipex	*parse_input(int argc, char *argv[], t_pipex *pipex_data)
 {
-	pipex_data->infile = get_fd(argv[1], pipex_data);
-	pipex_data->outfile = get_fd(argv[4], pipex_data);
-	pipex_data->cmd_1 = ft_split(argv[2], ' ');
-	pipex_data->cmd_path_1 = parse_program_path(argv[2], pipex_data);
-	pipex_data->cmd_2 = ft_split(argv[3], ' ');
-	pipex_data->cmd_path_2 = parse_program_path(argv[3], pipex_data);
+	pipex_data->infile = get_fd(argv[1], 0, pipex_data);
+	pipex_data->outfile = get_fd(argv[argc - 1], O_CREAT | O_TRUNC, pipex_data);
+	parse_commands(argc, argv, pipex_data);
 	return (pipex_data);
 }
