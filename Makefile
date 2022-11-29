@@ -13,6 +13,7 @@ BONUS_SOURCE	:= ./source/main_bonus.c ./source/validate_bonus.c \
 					./source/parser_bonus.c ./source/errors_bonus.c \
 					./source/pipex_bonus.c ./source/utils_bonus.c
 BONUS_OBJS		:= $(BONUS_SOURCE:./source/%.c=./objects/%.o)
+BONUS_HEADERS	:= ./includes/pipex_bonus.h ./includes/libft.h
 
 # General purpose
 LIBFT			:= libft.a
@@ -75,7 +76,7 @@ demo:			$(NAME)
 
 demo_bonus:		$(BONUS_NAME)
 				@echo "$(BLUE)---Starting demo---$(OFF)"
-				@./$(BONUS_NAME) in.txt "ping -c 5 google.com" "grep rtt" out.txt
+				@./$(BONUS_NAME) in.txt "sort" "uniq -d" "wc" "wc" out.txt
 				@echo "$(BLUE)---Ending demo---$(OFF)"
 
 .PHONY: 		all clean fclean re
