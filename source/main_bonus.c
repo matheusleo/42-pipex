@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:46 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/29 00:36:08 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/29 01:31:11 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static t_pipex	init_pipex_struct(void)
 	data.cmds_len = 0;
 	data.outfile = 1;
 	data.status = OK;
-	data.pipe[0] = 0;
-	data.pipe[1] = 0;
+	data.pids = NULL;
 	return (data);
 }
 
@@ -30,6 +29,8 @@ int	shutdown_pipex(t_pipex *pipex_data)
 {
 	if (pipex_data->cmds)
 		free(pipex_data->cmds);
+	if (pipex_data->pids)
+		free(pipex_data->pids);
 	close(pipex_data->infile);
 	close(pipex_data->outfile);
 	exit(pipex_data->status);
