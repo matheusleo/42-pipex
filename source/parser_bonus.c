@@ -6,13 +6,13 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 12:25:26 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/29 01:42:15 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:57:37 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-static char	**parse_commands(int argc, char *argv[], t_pipex *pipex_data)
+static void	parse_commands(int argc, char *argv[], t_pipex *pipex_data)
 {
 	char	**commands;
 	int		counter;
@@ -20,7 +20,10 @@ static char	**parse_commands(int argc, char *argv[], t_pipex *pipex_data)
 	counter = 0;
 	commands = (char **)malloc(sizeof(char *) * (argc - 3));
 	while (counter < argc - 3)
-		commands[counter++] = argv[counter + 2];
+	{
+		commands[counter] = argv[counter + 2];
+		counter++;
+	}
 	pipex_data->cmds = commands;
 	pipex_data->cmds_len = counter;
 }
