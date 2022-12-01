@@ -75,8 +75,13 @@ demo:			$(NAME)
 				@echo "$(BLUE)---Ending demo---$(OFF)"
 
 demo_bonus:		$(BONUS_NAME)
-				@echo "$(BLUE)---Starting demo---$(OFF)"
+				@echo "$(BLUE)---Starting bonus demo---$(OFF)"
 				@./$(BONUS_NAME) in.txt "sort" "uniq -d" "wc" "wc" out.txt
-				@echo "$(BLUE)---Ending demo---$(OFF)"
+				@echo "$(BLUE)---Ending bonus demo---$(OFF)"
+
+demo_here_doc:	$(BONUS_NAME)
+				@echo "$(BLUE)---Starting here_doc demo---$(OFF)"
+				@./$(BONUS_NAME) here_doc EOF "cat" "base64 -d" out.txt
+				@echo "$(BLUE)---Ending here_doc demo---$(OFF)"
 
 .PHONY: 		all clean fclean re
