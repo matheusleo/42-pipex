@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 12:25:26 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/29 23:57:37 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/01 02:22:40 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,22 @@ char	*parse_program_path(char *cmd, t_pipex *pipex_data)
 	return (cmd_path);
 }
 
+t_pipex	*parse_here_doc(int argc, char *argv[], t_pipex *pipex_data)
+{
+	pipex_data->here_doc = TRUE;
+	pipex_data->cmds = (char **)malloc(sizeof(char *) * 2);
+	pipex_data->cmds[0] = argv[3];
+	pipex_data->cmds[1] = argv[4];
+	pipex_data->limiter = argv[2];
+	pipex_data->infile = STDIN;
+	pipex_data->outfile = get_fd(argv[argc - 1], O_CREAT | O_TRUNC, pipex_data);
+	return (pipex_data);
+}
+
 t_pipex	*parse_input(int argc, char *argv[], t_pipex *pipex_data)
 {
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+		return (parse_here_doc(argc, argv, pipex_data));
 	pipex_data->infile = get_fd(argv[1], 0, pipex_data);
 	pipex_data->outfile = get_fd(argv[argc - 1], O_CREAT | O_TRUNC, pipex_data);
 	parse_commands(argc, argv, pipex_data);
