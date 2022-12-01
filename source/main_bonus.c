@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:46 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/29 23:36:04 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/30 01:58:02 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static t_pipex	init_pipex_struct(void)
 	data.pipes[0][1] = 0;
 	data.pipes[1][0] = 1;
 	data.pipes[1][1] = 0;
+	data.here_doc = FALSE;
+	data.limiter = NULL;
 	return (data);
 }
 
@@ -44,7 +46,7 @@ int	main(int argc, char *argv[])
 {
 	t_pipex	pipex_data;
 
-	validate_input(argc);
+	validate_input(argc, argv);
 	pipex_data = init_pipex_struct();
 	parse_input(argc, argv, &pipex_data);
 	pipex(&pipex_data);

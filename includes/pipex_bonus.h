@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:53 by mleonard          #+#    #+#             */
-/*   Updated: 2022/11/29 01:28:59 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/11/30 01:32:28 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_pipex
 	int		status;
 	int		*pids;
 	int		pipes[2][2];
+	int		here_doc;
+	char	*limiter;
 }				t_pipex;
 
 // I/O macros
@@ -41,7 +43,7 @@ typedef struct s_pipex
 # define INPUT 1
 
 // Validate user input functions
-int		validate_input(int argc);
+int		validate_input(int argc, char *argv[]);
 
 // Parser related functions
 t_pipex	*parse_input(int argc, char *argv[], t_pipex *pipex_data);
