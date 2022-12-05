@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:53 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/01 02:22:07 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/02 00:49:35 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_pipex
 	int		pipes[2][2];
 	int		here_doc;
 	char	*limiter;
+	int		limiter_len;
 }				t_pipex;
 
 // I/O macros
@@ -58,10 +59,13 @@ void	error_access(char *cmd, t_pipex *pipex_data);
 
 // Main functions
 int		pipex(t_pipex *pipex_data);
+int		here_doc(t_pipex *pipex_data);
 int		shutdown_pipex(t_pipex *pipex_data);
 
 // Utils functions
 int		get_fd(char *file_name, int flags, t_pipex *pipex_data);
 void	free_vector(char **splitted);
+int		create_child(t_pipex *pipex_data);
+void	close_pipe(int pipe[2]);
 
 #endif

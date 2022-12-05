@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 12:25:26 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/01 02:22:40 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/02 00:50:27 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ t_pipex	*parse_here_doc(int argc, char *argv[], t_pipex *pipex_data)
 	pipex_data->cmds = (char **)malloc(sizeof(char *) * 2);
 	pipex_data->cmds[0] = argv[3];
 	pipex_data->cmds[1] = argv[4];
+	pipex_data->cmds_len = 2;
+	pipex_data->pids = (int *)malloc(sizeof(int) * 2);
 	pipex_data->limiter = argv[2];
+	pipex_data->limiter_len = ft_strlen(argv[2]);
 	pipex_data->infile = STDIN;
 	pipex_data->outfile = get_fd(argv[argc - 1], O_CREAT | O_TRUNC, pipex_data);
 	return (pipex_data);
