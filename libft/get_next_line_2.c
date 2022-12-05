@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 21:50:27 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/02 01:11:09 by mleonard         ###   ########.fr       */
+/*   Created: 2022/12/02 01:14:23 by mleonard          #+#    #+#             */
+/*   Updated: 2022/12/02 01:14:24 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*get_next_line(int fd)
+char	**get_next_line_2(int fd)
 {
 	static char	*remain[1024];
 	char		*current_line;
 	char		*temp;
+	char		**result;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -32,5 +33,8 @@ char	*get_next_line(int fd)
 	if (!remain[fd])
 		free(remain[fd]);
 	free(temp);
-	return (current_line);
+	result = (char **)malloc(sizeof(char *) * 2);
+	result[0] = current_line;
+	result[1] = remain[fd];
+	return (result);
 }

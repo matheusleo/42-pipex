@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:50:42 by mleonard          #+#    #+#             */
-/*   Updated: 2022/10/09 17:58:16 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/02 01:09:59 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // GNL
 char	*get_next_line(int fd);
+char	**get_next_line_2(int fd);
+char	*compute_line(char *line_raw);
+char	*get_remain(char *line_raw);
+char	*mount_line(char **line_raw);
+char	*create_line(char **current_line, int fd, char *temp);
 
 // ft_printf
 int		ft_printf(const char *format, ...);
