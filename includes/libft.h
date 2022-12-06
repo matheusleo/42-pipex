@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:50:42 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/02 01:09:59 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/05 23:37:29 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ char	*is_flag_char(char c);
 
 // My functions
 void	*ft_ternary(int codition, void *return_true, void *return_false);
+char	*ft_replace(char *ptr, int c, int pos);
 
 #endif

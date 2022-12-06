@@ -11,7 +11,7 @@ SOURCE		:=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 				get_next_line.c get_next_line_2.c get_next_line_utils.c \
 				ft_printf.c ft_print_char.c ft_print_hex.c ft_print_int.c \
 				ft_print_ptr.c ft_print_str.c ft_print_uint.c ft_flag_parser.c utils.c \
-				ft_ternary.c
+				ft_ternary.c ft_replace.c
 OBJS		:=	$(SOURCE:.c=.o)
 
 # Bonus part
