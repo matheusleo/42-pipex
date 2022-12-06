@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:40:30 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 02:57:30 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/06 02:58:57 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	get_fd(char *file_name, int flags, t_pipex *pipex_data)
 {
 	int	fd;
 
-	fd = open(file_name, O_RDWR | flags);
+	fd = open(file_name, O_RDWR | flags, 0644);
 	if (fd == ERR)
 		error_open(file_name, pipex_data);
 	return (fd);
