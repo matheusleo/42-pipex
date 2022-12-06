@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 12:25:26 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/02 00:50:27 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/06 01:20:28 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,15 @@ static void	parse_commands(int argc, char *argv[], t_pipex *pipex_data)
 char	**parse_program_args(char *cmd)
 {
 	char	**command;
+	char	*cmd_masked;
+	int		idx_word;
 
-	command = ft_split(cmd, ' ');
+	idx_word = 0;
+	cmd_masked = mask_spaces(cmd);
+	command = ft_split(cmd_masked, ' ');
+	free(cmd_masked);
+	while (command[idx_word])
+		unmask_spaces(command[idx_word++]);
 	return (command);
 }
 
