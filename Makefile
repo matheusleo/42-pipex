@@ -12,7 +12,7 @@ BONUS_NAME			:= $(NAME)_bonus
 BONUS_SOURCE	:= ./source/main_bonus.c ./source/validate_bonus.c \
 					./source/parser_bonus.c ./source/errors_bonus.c \
 					./source/pipex_bonus.c ./source/utils_bonus.c \
-					./source/here_doc_bonus.c
+					./source/masks_bonus.c ./source/here_doc_bonus.c
 BONUS_OBJS		:= $(BONUS_SOURCE:./source/%.c=./objects/%.o)
 BONUS_HEADERS	:= ./includes/pipex_bonus.h ./includes/libft.h
 
