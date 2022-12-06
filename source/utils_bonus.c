@@ -6,11 +6,33 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:40:30 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/01 22:20:25 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/06 02:57:30 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
+
+char	*remove_all(char *str, int old)
+{
+	char	**str_splitted;
+	char	*new_str;
+	char	*temp;
+	int		idx;
+
+	str_splitted = ft_split(str, old);
+	new_str = ft_strdup(str_splitted[0]);
+	idx = 1;
+	while(str_splitted[idx])
+	{
+		temp = ft_strjoin(new_str, str_splitted[idx]);
+		free(new_str);
+		new_str = ft_strdup(temp);
+		free(temp);
+		idx++;
+	}
+	free_vector(str_splitted);
+	return (new_str);
+}
 
 int	create_child(t_pipex *pipex_data)
 {

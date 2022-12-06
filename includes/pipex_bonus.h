@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:53 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 01:21:56 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/06 02:43:33 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		get_fd(char *file_name, int flags, t_pipex *pipex_data);
 void	free_vector(char **splitted);
 int		create_child(t_pipex *pipex_data);
 void	close_pipe(int pipe[2]);
+char	*remove_all(char *str, int old);
 char	*mask_spaces(char *cmd);
 char	*unmask_spaces(char *cmd);
 

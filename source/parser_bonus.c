@@ -6,7 +6,8 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 12:25:26 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 01:20:28 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/06 02:44:51 by mleonard         ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +48,13 @@ char	*parse_program_path(char *cmd, t_pipex *pipex_data)
 {
 	char	**cmd_splitted;
 	char	*cmd_path;
+	char	*cmd_filtered;
 
 	cmd_splitted = ft_split(cmd, ' ');
-	cmd_path = ft_strjoin("/bin/", cmd_splitted[0]);
+	cmd_filtered = remove_all(cmd_splitted[0], '\'');
+	cmd_path = ft_strjoin("/bin/", cmd_filtered);
 	free_vector(cmd_splitted);
+	free(cmd_filtered);
 	if (access(cmd_path, X_OK) == ERR)
 		error_access(cmd, pipex_data);
 	return (cmd_path);
