@@ -6,27 +6,45 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 12:11:36 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 21:32:38 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/07 02:56:40 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
+static int	check_empty_arguments(char *argv[])
+{
+	int	idx;
+
+	idx = 0;
+	while (argv[idx])
+	{
+		if (!ft_strlen(argv[idx++]))
+			return (ERR);
+	}
+	return (OK);
+}
+
 int	validate_input(int argc, char *argv[])
 {
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0 && argc != 6)
+	if (check_empty_arguments(argv) == ERR)
 	{
-		ft_printf("ERR: input does not attend the requirements\n");
-		ft_printf("Expected to be:\n	");
-		ft_printf("./pipex here_doc LIMITER '<cmd1>' '<cmd2>' <outfile>\n");
-		exit (ERR);
+		ft_printf("ERR_INPUT: malformatted input was passed to the program\n");
+		exit(ERR);
 	}
-	else if (argc < 5)
+	if (argc < 5)
 	{
 		ft_printf("ERR: input does not attend the requirements\n");
 		ft_printf("Expected to be: \n	");
 		ft_printf("./pipex <infile> '<cmd1>' '<cmd2>' ... '<cmdN>' <outfile>\n");
 		ft_printf("	OR ./pipex here_doc LIMITER '<cmd1>' '<cmd2>' <outfile>\n");
+		exit (ERR);
+	}
+	else if (ft_strncmp(argv[1], "here_doc", 8) == 0 && argc != 6)
+	{
+		ft_printf("ERR: input does not attend the requirements\n");
+		ft_printf("Expected to be:\n	");
+		ft_printf("./pipex here_doc LIMITER '<cmd1>' '<cmd2>' <outfile>\n");
 		exit (ERR);
 	}
 	return (OK);
