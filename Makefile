@@ -26,27 +26,30 @@ BLUE			:= \033[0;34m
 # Rules
 all:			$(NAME)
 
-$(NAME):	./libft/$(LIBFT) $(OBJS) $(HEADERS)
-				cp ./libft/$(LIBFT) .
-				$(CC) $(C_FLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBFT)
-				cp $(NAME) $(NAME)
+$(NAME):		./libft/$(LIBFT) $(OBJS) $(HEADERS)
+				@echo "$(GREEN)All object files for $(NAME) were created!$(OFF)"
+				@cp ./libft/$(LIBFT) .
+				@$(CC) $(C_FLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBFT)
+				@echo "$(GREEN)$(NAME) files were sucessfully linked!$(OFF)"
 
 ./libft/$(LIBFT):
-				make -C libft/
-				make -C libft/ bonus
+				@make -C libft/
+				@make -C libft/ bonus
 
 ./objects/%.o:	./source/%.c
-				mkdir -p objects
-				$(CC) $(C_FLAGS) -c $(INCLUDES) -o $@ $<
+				@mkdir -p objects
+				@$(CC) $(C_FLAGS) -c $(INCLUDES) -o $@ $<
 
 clean:
-				$(RM) $(OBJS) $(OBJS)
-				$(RM) objects
-				make -C libft/ clean
+				@$(RM) $(OBJS)
+				@$(RM) objects
+				@echo "$(RED)The object files from $(NAME) were sucessfully removed!$(OFF)"
+				@make -C libft/ clean
 
 fclean: 		clean
-				$(RM) $(NAME) $(NAME) $(LIBFT)
-				make -C libft/ fclean
+				@$(RM) $(NAME) $(LIBFT)
+				@make -C libft/ fclean
+				@echo "$(RED)The $(NAME) was removed!$(OFF)"
 
 re:				fclean all
 
