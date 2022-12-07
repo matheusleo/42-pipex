@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   space_handlers.c                                   :+:      :+:    :+:   */
+/*   masks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 01:19:33 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 01:39:24 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/06 21:32:38 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex_bonus.h>
+#include <pipex.h>
 
 static void	replace(char *ptr, int c, int pos)
 {
