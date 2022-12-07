@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:46:05 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 21:46:09 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/07 02:58:47 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,24 @@
 static void	parse_commands(int argc, char *argv[], t_pipex *pipex_data)
 {
 	char	**commands;
+	char	*cmd_path;
+	char	cmd[50];
 	int		counter;
 
 	counter = 0;
 	commands = (char **)malloc(sizeof(char *) * (argc - 3));
 	while (counter < argc - 3)
 	{
+		cmd_path = parse_program_path(argv[counter + 2]);
 		commands[counter] = argv[counter + 2];
+		if (access(cmd_path, X_OK) == ERR)
+		{
+			free(commands);
+			ft_strlcpy(cmd, cmd_path, ft_strlen(cmd_path) + 1);
+			free(cmd_path);
+			error_access(cmd, pipex_data);
+		}
+		free(cmd_path);
 		counter++;
 	}
 	pipex_data->cmds = commands;
@@ -43,7 +54,7 @@ char	**parse_program_args(char *cmd)
 	return (command);
 }
 
-char	*parse_program_path(char *cmd, t_pipex *pipex_data)
+char	*parse_program_path(char *cmd)
 {
 	char	**cmd_splitted;
 	char	*cmd_path;
@@ -54,8 +65,6 @@ char	*parse_program_path(char *cmd, t_pipex *pipex_data)
 	cmd_path = ft_strjoin("/bin/", cmd_filtered);
 	free_vector(cmd_splitted);
 	free(cmd_filtered);
-	if (access(cmd_path, X_OK) == ERR)
-		error_access(cmd, pipex_data);
 	return (cmd_path);
 }
 

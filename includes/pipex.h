@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:24:53 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 21:32:32 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/07 03:09:31 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		validate_input(int argc, char *argv[]);
 
 // Parser related functions
 t_pipex	*parse_input(int argc, char *argv[], t_pipex *pipex_data);
-char	*parse_program_path(char *cmd, t_pipex *pipex_data);
+char	*parse_program_path(char *cmd);
 char	**parse_program_args(char *cmd);
 t_pipex	*parse_here_doc(int argc, char *argv[], t_pipex *pipex_data);
 

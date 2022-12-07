@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 21:59:32 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/06 21:32:38 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/07 02:59:11 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	here_doc(t_pipex *pipex_data)
 		{
 			redirect_input_output(pipex_data, pid_idx);
 			execve(
-				parse_program_path(pipex_data->cmds[pid_idx], pipex_data),
+				parse_program_path(pipex_data->cmds[pid_idx]),
 				parse_program_args(pipex_data->cmds[pid_idx]),
 				__environ
 				);

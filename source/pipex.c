@@ -47,7 +47,7 @@ int	pipex(t_pipex *pipex_data)
 		{
 			redirect_input_output(pipex_data, pid_idx);
 			execve(
-				parse_program_path(pipex_data->cmds[pid_idx], pipex_data),
+				parse_program_path(pipex_data->cmds[pid_idx]),
 				parse_program_args(pipex_data->cmds[pid_idx]),
 				__environ
 				);
