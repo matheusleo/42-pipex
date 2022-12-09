@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:46:05 by mleonard          #+#    #+#             */
-/*   Updated: 2022/12/07 02:58:47 by mleonard         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:08:32 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_pipex	*parse_here_doc(int argc, char *argv[], t_pipex *pipex_data)
 
 t_pipex	*parse_input(int argc, char *argv[], t_pipex *pipex_data)
 {
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0 \
+			 && ft_strlen(argv[1]) == 8)
 		return (parse_here_doc(argc, argv, pipex_data));
 	pipex_data->infile = get_fd(argv[1], 0, pipex_data);
 	pipex_data->outfile = get_fd(argv[argc - 1], O_CREAT | O_TRUNC, pipex_data);
